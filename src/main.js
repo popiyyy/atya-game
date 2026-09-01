@@ -37,7 +37,7 @@ byId("startForm").addEventListener("submit", (event) => { event.preventDefault()
 byId("calibrationButton").addEventListener("click", startCountdown);
 byId("skipCalibrationButton").addEventListener("click", () => { pointerMode = true; mapper.calibrate({ x: .5, y: .5 }); startCountdown(); });
 byId("playAgainButton").addEventListener("click", beginCalibration);
-byId("homeButton").addEventListener("click", () => { state.go(GAME_STATES.IDLE); screens.show("idle"); byId("playerName").value = ""; });
+byId("homeButton").addEventListener("click", () => { state.go(GAME_STATES.IDLE); screens.show("idle"); byId("playerName").value = ""; document.querySelector(".camera-panel").classList.add("hide-camera"); tracker.stop(); });
 byId("muteButton").addEventListener("click", () => { muted = !muted; byId("muteButton").textContent = `Suara: ${muted ? "OFF" : "ON"}`; });
 canvas.addEventListener("pointermove", (event) => { const rect = canvas.getBoundingClientRect(); pointerPoint = { x: (event.clientX - rect.left) / rect.width * CONFIG.CANVAS_WIDTH, y: (event.clientY - rect.top) / rect.height * CONFIG.CANVAS_HEIGHT }; });
 
@@ -50,8 +50,11 @@ async function beginCalibration() {
   if (state.value === GAME_STATES.ENDED) state.go(GAME_STATES.CALIBRATION); else state.go(GAME_STATES.CALIBRATION);
   latestHandPoint = null; lastDetectedAt = 0; calibrationCandidate = null; calibrationStableSince = 0; calibrationReady = false; calibrationStartedAt = performance.now(); pointerMode = false;
   screens.show("calibration"); screens.setCalibration("Menunggu tangan...", false);
+  document.querySelector(".camera-panel").classList.remove("hide-camera");
   document.querySelector(".camera-panel").classList.add("calibration-mode");
-  try { await tracker.start(); } catch { byId("trackingStatus").textContent = "Mode pointer aktif"; screens.setCalibration("Kamera tidak tersedia. Gerakkan mouse/touch di area game, lalu lanjutkan.", true); calibrationReady = true; }
+  if (!tracker.active) {
+    try { await tracker.start(); } catch { byId("trackingStatus").textContent = "Mode pointer aktif"; screens.setCalibration("Kamera tidak tersedia. Gerakkan mouse/touch di area game, lalu lanjutkan.", true); calibrationReady = true; }
+  }
   if (!tracker.active) pointerMode = true;
 }
 
@@ -70,7 +73,9 @@ function finishGame() {
   if (!session || state.value !== GAME_STATES.PLAYING) return;
   state.go(GAME_STATES.ENDED); 
   leaderboard.save(currentPilotName, session.score);
-  screens.setEnded(session.score, session.delivered, session.bestCombo); screens.show("ended"); leaderboard.renderAll(); playTone(180, .25); tracker.stop();
+  screens.setEnded(session.score, session.delivered, session.bestCombo); screens.show("ended"); leaderboard.renderAll(); playTone(180, .25);
+  document.querySelector(".camera-panel").classList.add("hide-camera");
+  tracker.stop();
 }
 
 function frame(now) {
