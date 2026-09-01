@@ -59,7 +59,13 @@
             <h2>Terbangkan.<br /><em>Antar.</em> Ulangi.</h2>
             <p class="screen-copy">Antarkan paket ke rumah yang tepat, hindari zona merah, dan jaga drone tetap aman dari traffic udara yang bergerak.</p>
             <div class="mission-specs"><span><b>01</b> HAND CONTROL</span><span><b>02</b> MOVING TRAFFIC</span><span><b>03</b> BUILD A COMBO</span></div>
-            <button id="startButton" class="primary-button" type="button"><span>Mulai misi</span><b>ENTER</b></button>
+            <form id="startForm" class="score-form" style="margin-top: 30px;">
+              <label for="playerName">NAMA / INISIAL PILOT</label>
+              <div class="name-row">
+                <input id="playerName" name="playerName" required maxlength="12" autocomplete="off" placeholder="DRONE-01" />
+                <button type="submit" id="startButton" class="primary-button" style="min-width: 140px; margin-bottom: 0;"><span>Mulai misi</span><b>ENTER</b></button>
+              </div>
+            </form>
           </div>
           <div class="leaderboard-block right-panel">
             <div class="section-heading"><span>HALL OF PILOTS / TOP 10</span><span>SKOR</span></div>
@@ -88,11 +94,9 @@
             <h2 id="finalScore">0 poin</h2>
             <p id="finalSummary" class="screen-copy">Paket terkirim: 0</p>
             <div class="end-stats"><span><b id="finalDelivered">0</b><small>DROP</small></span><span><b id="finalCombo">0</b><small>BEST COMBO</small></span></div>
-            <form id="scoreForm" class="score-form">
-              <label for="playerName">Nama / inisial</label>
-              <div class="name-row"><input id="playerName" name="playerName" maxlength="12" autocomplete="off" placeholder="DRONE-01" /><button class="primary-button" type="submit">Simpan</button></div>
-            </form>
+
             <button id="playAgainButton" class="secondary-button" type="button">Terbang lagi <span>GO</span></button>
+            <button id="homeButton" class="text-button" type="button" style="display: block; width: 100%; margin-top: 10px; text-align: center;">Kembali ke Menu Utama</button>
             <div class="leaderboard-block"><div class="section-heading"><span>HALL OF PILOTS / TOP 10</span><span>SKOR</span></div><ol id="endedLeaderboard" class="leaderboard-list"></ol></div>
           </div>
         </section>
