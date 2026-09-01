@@ -28,31 +28,27 @@ h2 em { color: var(--blue); font-style: normal; }
 .icon-button { border: 2px solid var(--navy); border-radius: 0; padding: 9px 15px; background: var(--cream); color: var(--navy); font-size: 11px; font-weight: 900; box-shadow: 3px 3px 0 var(--navy); }
 .game-stage { position: relative; overflow: hidden; flex: 1; min-height: 300px; border: 4px solid var(--navy); border-radius: 0; background: var(--sky); box-shadow: 8px 9px 0 var(--line); }
 #gameCanvas { display: block; width: 100%; height: 100%; touch-action: none; }
-.hud { position: absolute; inset: 15px 17px auto; display: flex; align-items: stretch; gap: 12px; pointer-events: none; }
-.hud-card, .package-card { position: relative; min-width: 110px; padding: 10px 16px 12px 46px; border: 3px solid var(--navy); border-radius: 0; background: var(--cream); color: var(--navy); box-shadow: 4px 4px 0 var(--navy); }
-.hud-card:first-child { border-color: var(--blue); padding-bottom: 16px; }
+
+.hud { position: absolute; inset: 15px auto auto 17px; display: flex; align-items: flex-start; gap: 10px; pointer-events: none; white-space: nowrap; }
+.hud-card, .package-card { position: relative; min-width: 110px; padding: 10px 16px 10px 46px; border: 3px solid var(--navy); border-radius: 0; background: var(--cream); color: var(--navy); box-shadow: 4px 4px 0 var(--navy); }
+.hud-card:first-child { border-color: var(--blue); }
 .score-card { border-color: var(--coral); }
 .stat-card { border-color: var(--mint); }
-
 .hud-label { display: block; color: var(--navy); font-size: 10px; font-weight: 900; letter-spacing: 0.08em; opacity: 0.6; margin-bottom: 2px; }
-
-.hud-card strong { display: inline-block; font-size: 26px; line-height: 1; letter-spacing: -0.05em; vertical-align: middle; margin-top: 2px; }
+.hud-card strong { display: inline-block; font-size: 26px; line-height: 1; letter-spacing: -0.05em; vertical-align: baseline; }
 .score-card strong { color: var(--coral); }
 .stat-card strong { color: var(--mint); }
-.stat-card small { color: var(--navy); font-size: 14px; opacity: 0.6; letter-spacing: 0; margin-left: 4px; }
-.hud-unit { display: inline-block; color: var(--navy); font-size: 11px; font-weight: 900; opacity: 0.6; margin-left: 4px; vertical-align: middle; }
-
+.stat-card small { color: var(--navy); font-size: 14px; opacity: 0.6; letter-spacing: 0; margin-left: 4px; vertical-align: baseline; }
 .hud-icon { position: absolute; top: 50%; left: 14px; transform: translateY(-50%); display: block; width: 20px; height: 20px; }
 .clock-icon { border: 3px solid var(--blue); }
-.clock-icon::after { position: absolute; left: 5px; top: 3px; width: 3px; height: 7px; background: var(--blue); content: ""; transform-origin: bottom; }
+.clock-icon::after { position: absolute; left: 5px; top: 3px; width: 3px; height: 7px; background: var(--blue); content: ''; transform-origin: bottom; }
 .star-icon { background: var(--yellow); clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 94%, 50% 72%, 21% 94%, 32% 57%, 2% 35%, 39% 35%); }
-.box-icon { border: 3px solid var(--mint); transform: translateY(-50%) rotate(45deg) scale(0.75); } 
+.box-icon { border: 3px solid var(--mint); transform: translateY(-50%) rotate(45deg) scale(0.75); }
 .target-icon { border: 3px solid var(--coral); }
-.target-icon::after { position: absolute; inset: 4px; border: 2px solid var(--coral); content: ""; }
-
-.timer-track { position: absolute; bottom: 0; left: 0; width: 100%; height: 5px; background: rgba(0,0,0,0.1); overflow: hidden; }
-.timer-track i { display: block; height: 100%; background: var(--blue); transition: width 0.2s linear; }
-
+.target-icon::after { position: absolute; inset: 4px; border: 2px solid var(--coral); content: ''; }
+.hud-unit { display: inline-block; color: var(--navy); font-size: 11px; font-weight: 900; opacity: 0.6; margin-left: 4px; vertical-align: baseline; }
+.timer-track { position: absolute; bottom: 0; left: 0; width: 100%; height: 5px; background: rgba(0,0,0,0.1); overflow: hidden; margin: 0; }
+.timer-track i { display: block; width: 100%; height: 100%; background: var(--blue); transition: width .2s linear; }
 .package-card { display: flex; align-items: center; gap: 10px; min-width: 175px; border-color: var(--yellow); padding: 10px 16px 10px 46px; }
 .package-card .hud-label { margin-bottom: 0; }
 .package-swatch { width: 18px; height: 18px; border: 3px solid var(--navy); }
@@ -116,7 +112,7 @@ h2 em { color: var(--blue); font-style: normal; }
   .screen-panel { width: 100%; min-width: 0; padding: 25px; border-radius: 0; }
   .compact-panel { width: min(480px, calc(100% - 30px)); margin: auto; border-radius: 0; }
   h2 { font-size: 42px; }
-  .camera-panel { right: 10px; bottom: 10px; }
+  .camera-panel { top: 10px; right: 10px; }
   .hud { inset: 9px; gap: 4px; }
   .hud-card, .package-card { min-width: 0; padding: 7px 8px 7px 31px; }
   .hud-card strong { font-size: 19px; }

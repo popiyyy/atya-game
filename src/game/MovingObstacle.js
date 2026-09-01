@@ -12,12 +12,12 @@ export function createMovingObstacles(houses) {
       targetX: start.x,
       targetY: start.y,
       radius: CONFIG.MOVING_OBSTACLE_RADIUS,
-      speed: 115 + Math.random() * 65,
-      followBias: [.32, .22, .38, .26][index % 4],
+      speed: 145 + Math.random() * 75,
+      followBias: [.45, .35, .50, .40][index % 4],
       followOffset: { x: (index - 1) * 85, y: index % 2 ? 70 : -55 },
       phase: Math.random() * Math.PI * 2,
       color: OBSTACLE_COLORS[index % OBSTACLE_COLORS.length],
-      label: "AIR TAXI",
+      label: "KORLAP",
       hitUntil: 0,
       nextTurnAt: 0
     };
