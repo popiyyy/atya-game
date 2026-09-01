@@ -31,12 +31,13 @@ let muted = false;
 let pointerMode = false;
 let audioContext = null;
 let lastFrame = performance.now();
+let currentPilotName = "ANONYMOUS";
 
-byId("startButton").addEventListener("click", beginCalibration);
+byId("startForm").addEventListener("submit", (event) => { event.preventDefault(); currentPilotName = byId("playerName").value || "ANONYMOUS"; beginCalibration(); });
 byId("calibrationButton").addEventListener("click", startCountdown);
 byId("skipCalibrationButton").addEventListener("click", () => { pointerMode = true; mapper.calibrate({ x: .5, y: .5 }); startCountdown(); });
 byId("playAgainButton").addEventListener("click", beginCalibration);
-byId("scoreForm").addEventListener("submit", (event) => { event.preventDefault(); leaderboard.save(byId("playerName").value, session?.score || 0); byId("playAgainButton").focus(); });
+byId("homeButton").addEventListener("click", () => { state.go(GAME_STATES.IDLE); screens.show("idle"); byId("playerName").value = ""; });
 byId("muteButton").addEventListener("click", () => { muted = !muted; byId("muteButton").textContent = `Suara: ${muted ? "OFF" : "ON"}`; });
 canvas.addEventListener("pointermove", (event) => { const rect = canvas.getBoundingClientRect(); pointerPoint = { x: (event.clientX - rect.left) / rect.width * CONFIG.CANVAS_WIDTH, y: (event.clientY - rect.top) / rect.height * CONFIG.CANVAS_HEIGHT }; });
 
@@ -49,6 +50,7 @@ async function beginCalibration() {
   if (state.value === GAME_STATES.ENDED) state.go(GAME_STATES.CALIBRATION); else state.go(GAME_STATES.CALIBRATION);
   latestHandPoint = null; lastDetectedAt = 0; calibrationCandidate = null; calibrationStableSince = 0; calibrationReady = false; calibrationStartedAt = performance.now(); pointerMode = false;
   screens.show("calibration"); screens.setCalibration("Menunggu tangan...", false);
+  document.querySelector(".camera-panel").classList.add("calibration-mode");
   try { await tracker.start(); } catch { byId("trackingStatus").textContent = "Mode pointer aktif"; screens.setCalibration("Kamera tidak tersedia. Gerakkan mouse/touch di area game, lalu lanjutkan.", true); calibrationReady = true; }
   if (!tracker.active) pointerMode = true;
 }
@@ -57,6 +59,7 @@ function startCountdown() {
   if (state.value !== GAME_STATES.CALIBRATION) return;
   if (calibrationCandidate) mapper.calibrate(calibrationCandidate); else mapper.calibrate({ x: .5, y: .5 });
   state.go(GAME_STATES.COUNTDOWN); countdownStartedAt = performance.now(); screens.show("countdown"); playTone(440, .08);
+  document.querySelector(".camera-panel").classList.remove("calibration-mode");
 }
 
 function startPlaying() {
@@ -65,7 +68,9 @@ function startPlaying() {
 
 function finishGame() {
   if (!session || state.value !== GAME_STATES.PLAYING) return;
-  state.go(GAME_STATES.ENDED); screens.setEnded(session.score, session.delivered, session.bestCombo); screens.show("ended"); leaderboard.renderAll(); playTone(180, .25); tracker.stop();
+  state.go(GAME_STATES.ENDED); 
+  leaderboard.save(currentPilotName, session.score);
+  screens.setEnded(session.score, session.delivered, session.bestCombo); screens.show("ended"); leaderboard.renderAll(); playTone(180, .25); tracker.stop();
 }
 
 function frame(now) {

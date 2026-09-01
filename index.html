@@ -11,13 +11,25 @@
     <main class="app-shell">
       <header class="topbar">
         <div class="brand-lockup">
-          <span class="brand-mark">DR</span>
+          <img
+            src="public/assets/Hexacopter.svg"
+            alt="Logo"
+            class="brand-mark"
+            style="object-fit: contain; padding: 4px"
+          />
           <div>
-            <p class="eyebrow">ROBOTICS OPEN DAY / CLASSIC ARCADE</p>
-            <h1>DRONE RUN <span>01</span></h1>
+            <p class="eyebrow">ROBOTIIK EXPO 2026</p>
+            <h1>DRONE RUN GAME</h1>
           </div>
         </div>
-        <button id="muteButton" class="icon-button" type="button" aria-label="Matikan suara">Suara: ON</button>
+        <button
+          id="muteButton"
+          class="icon-button"
+          type="button"
+          aria-label="Matikan suara"
+        >
+          Suara: ON
+        </button>
       </header>
 
       <section class="game-stage" aria-label="Area permainan">
@@ -38,7 +50,10 @@
           <div class="hud-card stat-card">
             <span class="hud-icon box-icon" aria-hidden="true"></span>
             <span class="hud-label">DROP / COMBO</span>
-            <strong><span id="deliveredValue">0</span> <small>/ x<span id="comboValue">0</span></small></strong>
+            <strong
+              ><span id="deliveredValue">0</span>
+              <small>/ x<span id="comboValue">0</span></small></strong
+            >
           </div>
           <div class="package-card" id="packageIndicator">
             <span class="hud-icon target-icon" aria-hidden="true"></span>
@@ -48,27 +63,47 @@
           </div>
         </div>
 
-        <div class="camera-panel">
-          <video id="cameraVideo" autoplay playsinline muted></video>
-          <span id="trackingStatus" class="tracking-status">Kamera belum aktif</span>
-        </div>
+
 
         <section id="idleScreen" class="screen screen-visible">
           <div class="screen-panel intro-panel">
-            <div class="hero-kicker"><span><span class="live-dot"></span> DELIVERY SIMULATION</span><span>40 SEC RUN</span></div>
-            <h2>Terbangkan.<br /><em>Antar.</em> Ulangi.</h2>
-            <p class="screen-copy">Antarkan paket ke rumah yang tepat, hindari zona merah, dan jaga drone tetap aman dari traffic udara yang bergerak.</p>
-            <div class="mission-specs"><span><b>01</b> HAND CONTROL</span><span><b>02</b> MOVING TRAFFIC</span><span><b>03</b> BUILD A COMBO</span></div>
-            <form id="startForm" class="score-form" style="margin-top: 30px;">
-              <label for="playerName">NAMA / INISIAL PILOT</label>
+            <h2>Kendalikan.<br /><em>Kirim.</em> Cetak Rekor.</h2>
+            <p class="screen-copy">
+              Buktikan keahlianmu sebagai pilot elit! Gunakan sensor gerak
+              tangan untuk bermanuver, hindari lalu lintas udara yang padat, dan
+              selesaikan misi pengiriman terbanyak dalam 40 detik.
+            </p>
+            <div class="mission-specs">
+              <span><b>01</b> HAND CONTROL</span
+              ><span><b>02</b> MOVING TRAFFIC</span
+              ><span><b>03</b> BUILD A COMBO</span>
+            </div>
+            <form id="startForm" class="score-form" style="margin-top: 30px">
+              <label for="playerName">NAMA PILOT</label>
               <div class="name-row">
-                <input id="playerName" name="playerName" required maxlength="12" autocomplete="off" placeholder="DRONE-01" />
-                <button type="submit" id="startButton" class="primary-button" style="min-width: 140px; margin-bottom: 0;"><span>Mulai misi</span><b>ENTER</b></button>
+                <input
+                  id="playerName"
+                  name="playerName"
+                  required
+                  maxlength="12"
+                  autocomplete="off"
+                  placeholder="Nama kamu..."
+                />
+                <button
+                  type="submit"
+                  id="startButton"
+                  class="primary-button"
+                  style="min-width: 140px; margin-bottom: 0"
+                >
+                  <span>Mulai misi</span>
+                </button>
               </div>
             </form>
           </div>
           <div class="leaderboard-block right-panel">
-            <div class="section-heading"><span>HALL OF PILOTS / TOP 10</span><span>SKOR</span></div>
+            <div class="section-heading">
+              <span>HALL OF PILOTS / TOP 10</span><span>SKOR</span>
+            </div>
             <ol id="idleLeaderboard" class="leaderboard-list"></ol>
           </div>
         </section>
@@ -77,15 +112,37 @@
           <div class="screen-panel compact-panel">
             <span class="step-badge">PRE-FLIGHT / 01</span>
             <h2>Lock your hand.</h2>
-            <p class="screen-copy">Tahan telapak tangan tetap terlihat selama satu detik untuk menjadikan posisi ini titik netral.</p>
-            <div id="calibrationState" class="status-message">Menunggu tangan...</div>
-            <button id="calibrationButton" class="primary-button" type="button" disabled>Lanjut</button>
-            <button id="skipCalibrationButton" class="text-button" type="button">Gunakan kontrol mouse/touch</button>
+            <p class="screen-copy">
+              Tahan telapak tangan tetap terlihat selama satu detik untuk
+              menjadikan posisi ini titik netral.
+            </p>
+            <div id="calibrationState" class="status-message">
+              Menunggu tangan...
+            </div>
+            <button
+              id="calibrationButton"
+              class="primary-button"
+              type="button"
+              disabled
+            >
+              Lanjut
+            </button>
+            <button
+              id="skipCalibrationButton"
+              class="text-button"
+              type="button"
+            >
+              Gunakan kontrol mouse/touch
+            </button>
           </div>
         </section>
 
         <section id="countdownScreen" class="screen" hidden>
-          <div class="countdown-panel"><span class="step-badge">FLIGHT COMPUTER READY</span><strong id="countdownValue">3</strong><span>Find the matching house.</span></div>
+          <div class="countdown-panel">
+            <span class="step-badge">FLIGHT COMPUTER READY</span
+            ><strong id="countdownValue">3</strong
+            ><span>Find the matching house.</span>
+          </div>
         </section>
 
         <section id="endedScreen" class="screen" hidden>
@@ -93,18 +150,50 @@
             <p class="eyebrow">FLIGHT LOG / COMPLETE</p>
             <h2 id="finalScore">0 poin</h2>
             <p id="finalSummary" class="screen-copy">Paket terkirim: 0</p>
-            <div class="end-stats"><span><b id="finalDelivered">0</b><small>DROP</small></span><span><b id="finalCombo">0</b><small>BEST COMBO</small></span></div>
+            <div class="end-stats">
+              <span><b id="finalDelivered">0</b><small>DROP</small></span
+              ><span><b id="finalCombo">0</b><small>BEST COMBO</small></span>
+            </div>
 
-            <button id="playAgainButton" class="secondary-button" type="button">Terbang lagi <span>GO</span></button>
-            <button id="homeButton" class="text-button" type="button" style="display: block; width: 100%; margin-top: 10px; text-align: center;">Kembali ke Menu Utama</button>
-            <div class="leaderboard-block"><div class="section-heading"><span>HALL OF PILOTS / TOP 10</span><span>SKOR</span></div><ol id="endedLeaderboard" class="leaderboard-list"></ol></div>
+            <button id="playAgainButton" class="secondary-button" type="button">
+              Terbang lagi <span>GO</span>
+            </button>
+            <button
+              id="homeButton"
+              class="text-button"
+              type="button"
+              style="
+                display: block;
+                width: 100%;
+                margin-top: 10px;
+                text-align: center;
+              "
+            >
+              Kembali ke Menu Utama
+            </button>
+            <div class="leaderboard-block">
+              <div class="section-heading">
+                <span>HALL OF PILOTS / TOP 10</span><span>SKOR</span>
+              </div>
+              <ol id="endedLeaderboard" class="leaderboard-list"></ol>
+            </div>
           </div>
         </section>
+        <div class="camera-panel">
+          <video id="cameraVideo" autoplay playsinline muted></video>
+          <span id="trackingStatus" class="tracking-status">Kamera belum aktif</span>
+        </div>
       </section>
-      <p class="footer-note"><span class="footer-key">TIPS :</span> Pegang telapak tangan terbuka di dalam frame kamera. Drone akan berhenti jika pilot keluar frame.</p>
+      <p class="footer-note">
+        <span class="footer-key">TIPS :</span> Pegang telapak tangan terbuka di
+        dalam frame kamera. Drone akan berhenti jika pilot keluar frame.
+      </p>
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"
+      crossorigin="anonymous"
+    ></script>
     <script type="module" src="src/main.js"></script>
   </body>
 </html>

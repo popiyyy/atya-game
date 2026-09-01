@@ -53,8 +53,11 @@ h2 em { color: var(--blue); font-style: normal; }
 .package-swatch { width: 18px; height: 18px; border: 3px solid var(--navy); border-radius: 0; }
 .package-card strong { font-size: 13px; }
 .camera-panel { position: absolute; right: 17px; bottom: 17px; width: min(21%, 215px); min-width: 135px; overflow: hidden; border: 3px solid var(--navy); border-radius: 0; background: #243b58; box-shadow: 4px 4px 0 var(--line); aspect-ratio: 4 / 3; }
+.camera-panel.calibration-mode { top: 54px; right: 54px; bottom: 54px; width: calc(100% - min(550px, 48%) - 108px); max-width: none; border: 4px solid var(--navy); box-shadow: 12px 12px 0 var(--navy); background: var(--paper); aspect-ratio: auto; }
 #cameraVideo { width: 100%; height: 100%; display: block; object-fit: cover; transform: scaleX(-1); opacity: .82; }
-.tracking-status { position: absolute; inset: auto 6px 6px; padding: 5px 6px; border-radius: 0; background: var(--paper); color: var(--cream); font-size: 9px; font-weight: 800; text-align: center; }
+.camera-panel.calibration-mode #cameraVideo { opacity: 1; }
+.tracking-status { position: absolute; inset: auto 6px 6px; padding: 5px 6px; border-radius: 0; background: var(--navy); color: var(--cream); font-size: 9px; font-weight: 800; text-align: center; }
+.camera-panel.calibration-mode .tracking-status { font-size: 14px; font-weight: 900; letter-spacing: 0.05em; text-transform: uppercase; padding: 12px 16px; bottom: 24px; left: 24px; right: 24px; border: 3px solid var(--navy); box-shadow: 4px 4px 0 var(--navy); color: var(--navy); background: var(--yellow); }
 .screen { position: absolute; inset: 0; display: flex; align-items: stretch; padding: 0; background: var(--paper); }
 .screen[hidden] { display: none; }
 .screen-panel { width: min(550px, 48%); min-width: 395px; padding: clamp(27px, 4vw, 57px); border-right: 3px solid var(--navy); border-radius: 0; background: var(--paper); box-shadow: 9px 0 0 var(--line); }
@@ -77,9 +80,9 @@ h2 em { color: var(--blue); font-style: normal; }
 .text-button { border: 0; padding: 12px 0 0; background: transparent; color: #71809a; font-size: 11px; }
 .step-badge { display: inline-block; margin-bottom: 13px; color: var(--blue); font-size: 10px; font-weight: 900; letter-spacing: .1em; }
 .status-message { margin: 18px 0; padding: 11px 12px; border: 2px solid var(--mint); border-radius: 0; background: #e8f7ed; color: #3b9167; font-size: 12px; }
-.countdown-panel { align-self: center; width: 100%; text-align: center; }
-.countdown-panel strong { display: block; color: var(--blue); font-size: clamp(120px, 24vw, 250px); line-height: .72; letter-spacing: -.1em; text-shadow: 6px 6px 0 rgba(38,59,89,.12); }
-.countdown-panel span:last-child { color: var(--navy); font-size: 17px; font-weight: 900; }
+.countdown-panel { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 16px; }
+.countdown-panel strong { color: var(--blue); font-size: clamp(120px, 24vw, 250px); line-height: 0.85; text-shadow: 10px 10px 0 var(--navy); margin-bottom: 10px; }
+.countdown-panel span:last-child { color: var(--navy); font-size: 17px; font-weight: 900; letter-spacing: 0.05em; }
 .leaderboard-block { margin-top: 27px; }
 .right-panel { flex: 1; padding: clamp(27px, 4vw, 57px); margin-top: 0; }
 .section-heading { display: flex; justify-content: space-between; padding: 0 0 12px; border-bottom: 4px solid var(--line); color: var(--navy); font-size: 14px; font-weight: 900; letter-spacing: .05em; }
