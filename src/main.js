@@ -42,7 +42,7 @@ canvas.addEventListener("pointermove", (event) => { const rect = canvas.getBound
 
 leaderboard.renderAll();
 hud.reset();
-if ("serviceWorker" in navigator) navigator.serviceWorker.register("service-worker.js").catch(() => undefined);
+if ("serviceWorker" in navigator) navigator.serviceWorker.getRegistrations().then(r => r.forEach(reg => reg.unregister()));
 requestAnimationFrame(frame);
 
 async function beginCalibration() {
